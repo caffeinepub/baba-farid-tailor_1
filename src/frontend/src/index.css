@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        
+        /* Charcoal Grey Base with Gold Accents */
+        --background: 0.98 0 0;
+        --foreground: 0.25 0.01 270;
+        
+        --card: 1 0 0;
+        --card-foreground: 0.25 0.01 270;
+        
+        --popover: 1 0 0;
+        --popover-foreground: 0.25 0.01 270;
+        
+        /* Gold Primary */
+        --primary: 0.70 0.15 85;
+        --primary-foreground: 0.15 0.01 270;
+        
+        /* Charcoal Secondary */
+        --secondary: 0.35 0.01 270;
+        --secondary-foreground: 0.98 0 0;
+        
+        --muted: 0.92 0 0;
+        --muted-foreground: 0.50 0.01 270;
+        
+        /* Deep Blue Accent */
+        --accent: 0.45 0.12 250;
+        --accent-foreground: 0.98 0 0;
+        
+        --destructive: 0.55 0.22 25;
+        --destructive-foreground: 0.98 0 0;
+        
+        --border: 0.88 0 0;
+        --input: 0.88 0 0;
+        --ring: 0.70 0.15 85;
+        
+        --chart-1: 0.70 0.15 85;
+        --chart-2: 0.45 0.12 250;
+        --chart-3: 0.35 0.01 270;
+        --chart-4: 0.60 0.10 200;
+        --chart-5: 0.50 0.08 150;
+    }
+
+    .dark {
+        --background: 0.18 0.01 270;
+        --foreground: 0.95 0 0;
+        
+        --card: 0.22 0.01 270;
+        --card-foreground: 0.95 0 0;
+        
+        --popover: 0.20 0.01 270;
+        --popover-foreground: 0.95 0 0;
+        
+        /* Gold Primary (brighter in dark mode) */
+        --primary: 0.75 0.18 85;
+        --primary-foreground: 0.15 0.01 270;
+        
+        /* Lighter Charcoal Secondary */
+        --secondary: 0.30 0.01 270;
+        --secondary-foreground: 0.95 0 0;
+        
+        --muted: 0.28 0.01 270;
+        --muted-foreground: 0.65 0 0;
+        
+        /* Brighter Deep Blue Accent */
+        --accent: 0.55 0.15 250;
+        --accent-foreground: 0.95 0 0;
+        
+        --destructive: 0.60 0.25 25;
+        --destructive-foreground: 0.95 0 0;
+        
+        --border: 0.30 0.01 270;
+        --input: 0.30 0.01 270;
+        --ring: 0.75 0.18 85;
+        
+        --chart-1: 0.75 0.18 85;
+        --chart-2: 0.55 0.15 250;
+        --chart-3: 0.40 0.02 270;
+        --chart-4: 0.65 0.12 200;
+        --chart-5: 0.55 0.10 150;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 600;
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}

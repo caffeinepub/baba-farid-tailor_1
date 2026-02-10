@@ -1,0 +1,18 @@
+{
+  "frontend/src/index.css": "Global styles with custom OKLCH color system implementing charcoal grey base with gold accents and deep blue highlights, plus Playfair Display and Inter font families for premium typography.",
+  "frontend/src/App.tsx": "Main application component that orchestrates all sections with intersection observer for active navigation tracking and smooth scrolling between sections.",
+  "frontend/src/config/contact.ts": "Centralized configuration file for contact information (phone, email, address, business name) used throughout the application.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for backend integration including catalog fetching, order submission, and inquiry submission with proper loading and error states.",
+  "frontend/src/components/navigation/TopContactBar.tsx": "Slim top bar displaying phone and email contact information with hover effects and responsive layout.",
+  "frontend/src/components/navigation/SiteHeader.tsx": "Sticky header with logo placeholder, business name, responsive navigation menu, and active section highlighting.",
+  "frontend/src/components/branding/LogoPlaceholder.tsx": "Reusable logo placeholder component with scissors icon in a styled container ready for custom logo replacement.",
+  "frontend/src/components/layout/Section.tsx": "Reusable section wrapper component providing consistent padding, container width, and background variants across all page sections.",
+  "frontend/src/components/sections/HomeHeroSection.tsx": "Hero section with background banner image, gradient overlay, compelling copy, and call-to-action buttons for ordering and viewing catalog.",
+  "frontend/src/components/sections/AboutSection.tsx": "About Us section highlighting bespoke tailoring expertise with feature cards showcasing craftsmanship, personalized service, premium materials, and timely delivery.",
+  "frontend/src/components/catalog/CatalogSection.tsx": "Catalog section displaying categories and styles from backend with filtering, loading states, error handling, and style selection that prefills the order form.",
+  "frontend/src/state/selectedStyle.ts": "Zustand store managing the currently selected style state shared between catalog and order sections.",
+  "frontend/src/components/order/OrderNowSection.tsx": "Comprehensive order form with customer information, style selection, detailed measurements inputs, validation, submission handling, and success confirmation view.",
+  "frontend/src/components/order/SizeGuidePanel.tsx": "Collapsible panel providing measurement instructions and standard size reference table to help customers accurately measure themselves.",
+  "frontend/src/components/sections/ContactSection.tsx": "Contact section with business information display and inquiry form with validation, submission handling, and success confirmation.",
+  "frontend/src/components/layout/SiteFooter.tsx": "Footer with brand information, quick navigation links, contact details, and attribution to caffeine.ai with UTM tracking."
+}

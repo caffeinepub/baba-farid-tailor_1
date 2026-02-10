@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build a professional, premium website for the tailoring business 'Baba Farid Tailor' featuring a catalog, online ordering with customer measurements, and standard business pages (Home, About, Catalog, Order Now, Contact).",
+  "architectural_notes": [
+    "Website should support a user-uploaded custom logo; include a placeholder slot in the header until provided.",
+    "Premium visual theme using Charcoal Grey, Gold, and/or Deep Blue across the site.",
+    "Information architecture includes pages: Home, About Us, Catalog, Order Now, Contact Us."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Premium fabric texture background, subtle weave pattern, dark charcoal tone (fabric-texture-bg.dim_1920x1080.png)\n- Elegant tailoring hero banner with abstract tailoring elements (measuring tape/suit silhouette), charcoal and gold palette (tailoring-hero-banner.dim_2400x900.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-multi-page-website-with-the-following-sections-pages-and-navigation-home-about-us-catalog-order-now-and-contact-us-ensure-the-header-navigation-links-correctly-route-scroll-to-each-section-and-the-active-section-is-visually-indicated",
+      "title": "Create a multi-page website with the following sections/pages and navigation: Home, About Us, Catalog, Order Now, and Contact Us. Ensure the header navigation links correctly route/scroll to each section and the active section is visually indicated.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-top-header-area-that-prominently-displays-the-business-name-baba-farid-tailor-and-includes-a-dedicated-logo-placeholder-region-intended-for-a-future-uploaded-custom-logo-placeholder-should-be-visually-distinct-and-sized-appropriately",
+      "title": "Implement a top header area that prominently displays the business name \"Baba Farid Tailor\" and includes a dedicated logo placeholder region intended for a future uploaded custom logo (placeholder should be visually distinct and sized appropriately).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-contact-details-mobile-number-and-email-id-clearly-in-a-top-bar-and-or-footer-using-placeholder-values-that-can-be-easily-replaced-later-e-g-constants-config-in-the-frontend",
+      "title": "Display contact details (Mobile Number and Email ID) clearly in a top bar and/or footer, using placeholder values that can be easily replaced later (e.g., constants/config in the frontend).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-premium-catalog-section-that-showcases-the-categories-suits-shirts-pants-and-traditional-wear-each-category-must-have-a-presentable-card-tile-layout-and-a-way-to-choose-a-style-that-can-be-used-by-the-order-now-form",
+      "title": "Create a premium 'Catalog' section that showcases the categories: Suits, Shirts, Pants, and Traditional wear. Each category must have a presentable card/tile layout and a way to choose a style that can be used by the Order Now form.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-an-order-now-page-containing-an-online-order-form-where-customers-can-1-select-a-category-and-style-from-the-catalog-and-2-submit-their-measurements-including-at-minimum-length-chest-waist-shoulder-include-additional-common-tailoring-measurements-as-appropriate-and-provide-size-chart-guidance-in-the-ui-e-g-a-reference-table-and-or-helper-text-without-requiring-user-authentication",
+      "title": "Implement an 'Order Now' page containing an online order form where customers can (1) select a category and style from the catalog and (2) submit their measurements (including at minimum Length, Chest, Waist, Shoulder). Include additional common tailoring measurements as appropriate and provide size-chart guidance in the UI (e.g., a reference table and/or helper text) without requiring user authentication.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-about-us-section-that-explicitly-mentions-expertise-in-bespoke-tailoring-and-premium-craftsmanship-using-clear-english-copy-appropriate-for-a-professional-tailoring-brand",
+      "title": "Add an About Us section that explicitly mentions expertise in bespoke tailoring and premium craftsmanship, using clear English copy appropriate for a professional tailoring brand.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-contact-us-section-page-that-includes-the-displayed-phone-email-a-simple-contact-form-name-email-phone-message-and-clear-location-placeholder-text-the-contact-form-may-submit-to-the-backend-as-a-stored-inquiry-or-may-be-ui-only-if-backend-storage-is-not-implemented-if-backend-storage-is-implemented-it-must-persist-inquiries-in-the-backend-actor",
+      "title": "Add a Contact Us section/page that includes the displayed phone/email, a simple contact form (name, email/phone, message) and clear location placeholder text. The contact form may submit to the backend as a stored inquiry or may be UI-only if backend storage is not implemented; if backend storage is implemented, it must persist inquiries in the backend actor.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-premium-professional-visual-theme-across-the-entire-site-using-a-coherent-palette-based-on-charcoal-grey-with-gold-accents-and-optional-deep-blue-highlights-ensure-consistent-typography-spacing-button-styles-and-section-hierarchy-and-avoid-using-a-blue-purple-default-theme",
+      "title": "Apply a premium, professional visual theme across the entire site using a coherent palette based on Charcoal Grey with Gold accents and optional Deep Blue highlights. Ensure consistent typography, spacing, button styles, and section hierarchy, and avoid using a blue+purple default theme.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-react-query-based-data-fetching-for-catalog-and-order-submission-including-loading-and-error-states-for-catalog-load-order-submission-and-if-implemented-contact-inquiry-submission",
+      "title": "Integrate React Query-based data fetching for catalog and order submission, including loading and error states for: catalog load, order submission, and (if implemented) contact inquiry submission.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-required-generated-static-images-to-enhance-the-premium-tailoring-aesthetic-e-g-subtle-fabric-texture-and-a-hero-banner-image-and-render-them-from-frontend-static-assets-do-not-serve-images-via-the-backend",
+      "title": "Add required generated static images to enhance the premium tailoring aesthetic (e.g., subtle fabric texture and a hero/banner image) and render them from frontend static assets (do not serve images via the backend).",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create website header with prominent business name and a dedicated placeholder area for an uploaded custom logo",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Display contact details (mobile number and email) clearly in a top bar and/or footer for easy customer reach",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add a Catalog section showcasing categories: Suits, Shirts, Pants, and Traditional wear",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Implement an Order Now page with an online order form to select styles from the catalog and submit customer measurements (e.g., length, chest, waist, shoulder) guided by size charts",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Apply a premium design aesthetic with a color palette such as Charcoal Grey, Gold, and/or Deep Blue to reflect high-quality craftsmanship",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Create required site sections/pages: Home, About Us (bespoke tailoring expertise), Catalog, Order Now (form), and Contact Us",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Create a backend data model and API in the single Motoko actor to: (1) return catalog categories/styles, (2) accept new order submissions containing selected catalog style + customer measurements + basic contact info, and (3) list orders for basic verification/testing purposes (non-authenticated is acceptable unless otherwise specified).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Baba Farid Tailor",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

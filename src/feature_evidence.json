@@ -1,0 +1,205 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-multi-page-website-with-the-following-sections-pages-and-navigation-home-about-us-catalog-order-now-and-contact-us-ensure-the-header-navigation-links-correctly-route-scroll-to-each-section-and-the-active-section-is-visually-indicated",
+      "featureTitle": "Create a multi-page website with the following sections/pages and navigation: Home, About Us, Catalog, Order Now, and Contact Us. Ensure the header navigation links correctly route/scroll to each section and the active section is visually indicated.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/navigation/SiteHeader.tsx",
+        "frontend/src/main.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-top-header-area-that-prominently-displays-the-business-name-baba-farid-tailor-and-includes-a-dedicated-logo-placeholder-region-intended-for-a-future-uploaded-custom-logo-placeholder-should-be-visually-distinct-and-sized-appropriately",
+      "featureTitle": "Implement a top header area that prominently displays the business name \"Baba Farid Tailor\" and includes a dedicated logo placeholder region intended for a future uploaded custom logo (placeholder should be visually distinct and sized appropriately).",
+      "files": [
+        "frontend/src/components/branding/LogoPlaceholder.tsx",
+        "frontend/src/components/navigation/SiteHeader.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-display-contact-details-mobile-number-and-email-id-clearly-in-a-top-bar-and-or-footer-using-placeholder-values-that-can-be-easily-replaced-later-e-g-constants-config-in-the-frontend",
+      "featureTitle": "Display contact details (Mobile Number and Email ID) clearly in a top bar and/or footer, using placeholder values that can be easily replaced later (e.g., constants/config in the frontend).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/layout/SiteFooter.tsx",
+        "frontend/src/components/navigation/TopContactBar.tsx",
+        "frontend/src/config/contact.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-premium-catalog-section-that-showcases-the-categories-suits-shirts-pants-and-traditional-wear-each-category-must-have-a-presentable-card-tile-layout-and-a-way-to-choose-a-style-that-can-be-used-by-the-order-now-form",
+      "featureTitle": "Create a premium 'Catalog' section that showcases the categories: Suits, Shirts, Pants, and Traditional wear. Each category must have a presentable card/tile layout and a way to choose a style that can be used by the Order Now form.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/catalog/CatalogSection.tsx",
+        "frontend/src/components/order/OrderNowSection.tsx",
+        "frontend/src/state/selectedStyle.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-an-order-now-page-containing-an-online-order-form-where-customers-can-1-select-a-category-and-style-from-the-catalog-and-2-submit-their-measurements-including-at-minimum-length-chest-waist-shoulder-include-additional-common-tailoring-measurements-as-appropriate-and-provide-size-chart-guidance-in-the-ui-e-g-a-reference-table-and-or-helper-text-without-requiring-user-authentication",
+      "featureTitle": "Implement an 'Order Now' page containing an online order form where customers can (1) select a category and style from the catalog and (2) submit their measurements (including at minimum Length, Chest, Waist, Shoulder). Include additional common tailoring measurements as appropriate and provide size-chart guidance in the UI (e.g., a reference table and/or helper text) without requiring user authentication.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/order/OrderNowSection.tsx",
+        "frontend/src/components/order/SizeGuidePanel.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-an-about-us-section-that-explicitly-mentions-expertise-in-bespoke-tailoring-and-premium-craftsmanship-using-clear-english-copy-appropriate-for-a-professional-tailoring-brand",
+      "featureTitle": "Add an About Us section that explicitly mentions expertise in bespoke tailoring and premium craftsmanship, using clear English copy appropriate for a professional tailoring brand.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sections/AboutSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-contact-us-section-page-that-includes-the-displayed-phone-email-a-simple-contact-form-name-email-phone-message-and-clear-location-placeholder-text-the-contact-form-may-submit-to-the-backend-as-a-stored-inquiry-or-may-be-ui-only-if-backend-storage-is-not-implemented-if-backend-storage-is-implemented-it-must-persist-inquiries-in-the-backend-actor",
+      "featureTitle": "Add a Contact Us section/page that includes the displayed phone/email, a simple contact form (name, email/phone, message) and clear location placeholder text. The contact form may submit to the backend as a stored inquiry or may be UI-only if backend storage is not implemented; if backend storage is implemented, it must persist inquiries in the backend actor.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sections/ContactSection.tsx",
+        "frontend/src/config/contact.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-premium-professional-visual-theme-across-the-entire-site-using-a-coherent-palette-based-on-charcoal-grey-with-gold-accents-and-optional-deep-blue-highlights-ensure-consistent-typography-spacing-button-styles-and-section-hierarchy-and-avoid-using-a-blue-purple-default-theme",
+      "featureTitle": "Apply a premium, professional visual theme across the entire site using a coherent palette based on Charcoal Grey with Gold accents and optional Deep Blue highlights. Ensure consistent typography, spacing, button styles, and section hierarchy, and avoid using a blue+purple default theme.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/layout/Section.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-integrate-react-query-based-data-fetching-for-catalog-and-order-submission-including-loading-and-error-states-for-catalog-load-order-submission-and-if-implemented-contact-inquiry-submission",
+      "featureTitle": "Integrate React Query-based data fetching for catalog and order submission, including loading and error states for: catalog load, order submission, and (if implemented) contact inquiry submission.",
+      "files": [
+        "frontend/src/components/catalog/CatalogSection.tsx",
+        "frontend/src/components/order/OrderNowSection.tsx",
+        "frontend/src/components/sections/ContactSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-required-generated-static-images-to-enhance-the-premium-tailoring-aesthetic-e-g-subtle-fabric-texture-and-a-hero-banner-image-and-render-them-from-frontend-static-assets-do-not-serve-images-via-the-backend",
+      "featureTitle": "Add required generated static images to enhance the premium tailoring aesthetic (e.g., subtle fabric texture and a hero/banner image) and render them from frontend static assets (do not serve images via the backend).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sections/HomeHeroSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
