@@ -8,7 +8,7 @@ import type { Measurement } from '../../backend';
 
 export default function OrderNowSection() {
   const { data: catalog } = useCatalog();
-  const { selectedStyle, setSelectedStyle } = useSelectedStyle();
+  const { selectedStyle, setSelectedStyle, reconcileWithCatalog } = useSelectedStyle();
   const submitOrder = useSubmitOrder();
 
   const [formData, setFormData] = useState({
@@ -36,6 +36,30 @@ export default function OrderNowSection() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submittedOrderId, setSubmittedOrderId] = useState<bigint | null>(null);
 
+  // Reconcile selected style with catalog when catalog changes
+  useEffect(() => {
+    if (catalog?.styles) {
+      reconcileWithCatalog(catalog.styles);
+      
+      // Clear form styleId if it no longer exists in catalog or is "Saree Blouse" or "African Kaftan"
+      if (formData.styleId) {
+        const selectedStyleInCatalog = catalog.styles.find(
+          (style) => style.id.toString() === formData.styleId
+        );
+        const styleExists = !!selectedStyleInCatalog;
+        const isExcludedStyle = selectedStyleInCatalog?.name === 'Saree Blouse' || 
+                                selectedStyleInCatalog?.name === 'African Kaftan';
+        
+        if (!styleExists || isExcludedStyle) {
+          setFormData((prev) => ({
+            ...prev,
+            styleId: '',
+          }));
+        }
+      }
+    }
+  }, [catalog, reconcileWithCatalog, formData.styleId]);
+
   useEffect(() => {
     if (selectedStyle) {
       setFormData((prev) => ({
@@ -60,6 +84,19 @@ export default function OrderNowSection() {
     }
     if (!formData.styleId) {
       newErrors.styleId = 'Please select a style';
+    }
+
+    // Pre-submit validation: ensure selected style exists in reconciled catalog
+    if (formData.styleId && catalog?.styles) {
+      const styleExists = catalog.styles.some(
+        (style) => style.id.toString() === formData.styleId
+      );
+      if (!styleExists) {
+        newErrors.styleId = 'Selected style is no longer available. Please choose another style.';
+        // Clear the invalid selection
+        setFormData((prev) => ({ ...prev, styleId: '' }));
+        setSelectedStyle(null);
+      }
     }
 
     // Validate required measurements
@@ -135,9 +172,17 @@ export default function OrderNowSection() {
     }
   };
 
+  // Only show selected style data if it still exists in catalog and is not "Saree Blouse" or "African Kaftan"
   const selectedStyleData = catalog?.styles.find(
-    (s) => s.id.toString() === formData.styleId
+    (s) => s.id.toString() === formData.styleId && 
+           s.name !== 'Saree Blouse' && 
+           s.name !== 'African Kaftan'
   );
+
+  // Filter out "Saree Blouse" and "African Kaftan" from style dropdown options
+  const availableStylesForCategory = catalog?.styles
+    .filter((s) => s.categoryId.toString() === formData.categoryId)
+    .filter((s) => s.name !== 'Saree Blouse' && s.name !== 'African Kaftan');
 
   if (submittedOrderId) {
     return (
@@ -228,15 +273,6 @@ export default function OrderNowSection() {
           <div className="bg-card border border-border rounded-xl p-6 space-y-6">
             <h3 className="text-xl font-semibold">Style Selection</h3>
             
-            {selectedStyleData && (
-              <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg">
-                <p className="text-sm text-muted-foreground mb-1">Selected Style:</p>
-                <p className="font-semibold text-lg">{selectedStyleData.name}</p>
-                <p className="text-sm text-muted-foreground">{selectedStyleData.description}</p>
-                <p className="text-primary font-bold mt-2">${selectedStyleData.price.toFixed(2)}</p>
-              </div>
-            )}
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className="text-sm font-medium">
@@ -251,9 +287,9 @@ export default function OrderNowSection() {
                   className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
                 >
                   <option value="">Select a category</option>
-                  {catalog?.categories.map((cat) => (
-                    <option key={cat.id.toString()} value={cat.id.toString()}>
-                      {cat.name}
+                  {catalog?.categories.map((category) => (
+                    <option key={category.id.toString()} value={category.id.toString()}>
+                      {category.name}
                     </option>
                   ))}
                 </select>
@@ -268,93 +304,248 @@ export default function OrderNowSection() {
                 </label>
                 <select
                   value={formData.styleId}
-                  onChange={(e) =>
-                    setFormData({ ...formData, styleId: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setFormData({ ...formData, styleId: e.target.value });
+                    const style = catalog?.styles.find(
+                      (s) => s.id.toString() === e.target.value
+                    );
+                    setSelectedStyle(style || null);
+                  }}
                   disabled={!formData.categoryId}
-                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <option value="">Select a style</option>
-                  {catalog?.styles
-                    .filter((s) => s.categoryId.toString() === formData.categoryId)
-                    .map((style) => (
-                      <option key={style.id.toString()} value={style.id.toString()}>
-                        {style.name} - ${style.price.toFixed(2)}
-                      </option>
-                    ))}
+                  {availableStylesForCategory?.map((style) => (
+                    <option key={style.id.toString()} value={style.id.toString()}>
+                      {style.name} - ${style.price.toFixed(2)}
+                    </option>
+                  ))}
                 </select>
                 {errors.styleId && (
                   <p className="text-sm text-destructive">{errors.styleId}</p>
                 )}
               </div>
             </div>
+
+            {selectedStyleData && (
+              <div className="mt-4 p-4 bg-muted rounded-lg">
+                <h4 className="font-semibold mb-2">{selectedStyleData.name}</h4>
+                <p className="text-sm text-muted-foreground mb-2">
+                  {selectedStyleData.description}
+                </p>
+                <p className="text-lg font-bold text-primary">
+                  ${selectedStyleData.price.toFixed(2)}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Measurements */}
           <div className="bg-card border border-border rounded-xl p-6 space-y-6">
             <div className="flex items-center justify-between">
-              <h3 className="text-xl font-semibold">Measurements</h3>
-              <span className="text-sm text-muted-foreground">All measurements in inches</span>
+              <h3 className="text-xl font-semibold">Measurements (inches)</h3>
+              <SizeGuidePanel />
             </div>
 
-            <SizeGuidePanel />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Required Measurements */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium">
+                  Chest <span className="text-destructive">*</span>
+                </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={measurements.chest}
+                  onChange={(e) =>
+                    setMeasurements({ ...measurements, chest: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="0.0"
+                />
+                {errors.chest && (
+                  <p className="text-sm text-destructive">{errors.chest}</p>
+                )}
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                { key: 'chest', label: 'Chest', required: true },
-                { key: 'waist', label: 'Waist', required: true },
-                { key: 'shoulder', label: 'Shoulder', required: true },
-                { key: 'length', label: 'Length', required: true },
-                { key: 'sleeveLength', label: 'Sleeve Length', required: false },
-                { key: 'bicepCircumference', label: 'Bicep', required: false },
-                { key: 'hipCircumference', label: 'Hip', required: false },
-                { key: 'inseam', label: 'Inseam', required: false },
-                { key: 'thighCircumference', label: 'Thigh', required: false },
-                { key: 'frontRise', label: 'Front Rise', required: false },
-                { key: 'backRise', label: 'Back Rise', required: false },
-                { key: 'cuffCircumference', label: 'Cuff', required: false },
-              ].map((field) => (
-                <div key={field.key} className="space-y-2">
-                  <label className="text-sm font-medium">
-                    {field.label}
-                    {field.required && <span className="text-destructive"> *</span>}
-                  </label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={measurements[field.key]}
-                    onChange={(e) =>
-                      setMeasurements({ ...measurements, [field.key]: e.target.value })
-                    }
-                    className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-                    placeholder="0.0"
-                  />
-                  {errors[field.key] && (
-                    <p className="text-sm text-destructive">{errors[field.key]}</p>
-                  )}
-                </div>
-              ))}
+              <div className="space-y-2">
+                <label className="text-sm font-medium">
+                  Waist <span className="text-destructive">*</span>
+                </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={measurements.waist}
+                  onChange={(e) =>
+                    setMeasurements({ ...measurements, waist: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="0.0"
+                />
+                {errors.waist && (
+                  <p className="text-sm text-destructive">{errors.waist}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">
+                  Shoulder <span className="text-destructive">*</span>
+                </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={measurements.shoulder}
+                  onChange={(e) =>
+                    setMeasurements({ ...measurements, shoulder: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="0.0"
+                />
+                {errors.shoulder && (
+                  <p className="text-sm text-destructive">{errors.shoulder}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">
+                  Length <span className="text-destructive">*</span>
+                </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={measurements.length}
+                  onChange={(e) =>
+                    setMeasurements({ ...measurements, length: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="0.0"
+                />
+                {errors.length && (
+                  <p className="text-sm text-destructive">{errors.length}</p>
+                )}
+              </div>
+
+              {/* Optional Measurements */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Hip Circumference</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={measurements.hipCircumference}
+                  onChange={(e) =>
+                    setMeasurements({ ...measurements, hipCircumference: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="0.0"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Inseam</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={measurements.inseam}
+                  onChange={(e) =>
+                    setMeasurements({ ...measurements, inseam: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="0.0"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Thigh Circumference</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={measurements.thighCircumference}
+                  onChange={(e) =>
+                    setMeasurements({ ...measurements, thighCircumference: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="0.0"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Front Rise</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={measurements.frontRise}
+                  onChange={(e) =>
+                    setMeasurements({ ...measurements, frontRise: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="0.0"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Back Rise</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={measurements.backRise}
+                  onChange={(e) =>
+                    setMeasurements({ ...measurements, backRise: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="0.0"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Cuff Circumference</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={measurements.cuffCircumference}
+                  onChange={(e) =>
+                    setMeasurements({ ...measurements, cuffCircumference: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="0.0"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Sleeve Length</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={measurements.sleeveLength}
+                  onChange={(e) =>
+                    setMeasurements({ ...measurements, sleeveLength: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="0.0"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Bicep Circumference</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={measurements.bicepCircumference}
+                  onChange={(e) =>
+                    setMeasurements({ ...measurements, bicepCircumference: e.target.value })
+                  }
+                  className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="0.0"
+                />
+              </div>
             </div>
           </div>
 
-          {/* Submit */}
-          <div className="flex flex-col items-center gap-4">
-            {submitOrder.isError && (
-              <div className="w-full p-4 bg-destructive/10 border border-destructive/20 rounded-lg flex items-start gap-3">
-                <AlertCircle className="h-5 w-5 text-destructive flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-medium text-destructive">Order Submission Failed</p>
-                  <p className="text-sm text-destructive/80">
-                    Please check your information and try again.
-                  </p>
-                </div>
-              </div>
-            )}
-
+          {/* Submit Button */}
+          <div className="flex justify-center">
             <button
               type="submit"
               disabled={submitOrder.isPending}
-              className="px-12 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg"
+              className="px-12 py-4 bg-primary text-primary-foreground rounded-lg font-semibold text-lg hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3"
             >
               {submitOrder.isPending ? (
                 <>
@@ -366,6 +557,15 @@ export default function OrderNowSection() {
               )}
             </button>
           </div>
+
+          {submitOrder.isError && (
+            <div className="flex items-center gap-3 p-4 bg-destructive/10 border border-destructive rounded-lg">
+              <AlertCircle className="h-5 w-5 text-destructive flex-shrink-0" />
+              <p className="text-sm text-destructive">
+                Failed to submit order. Please try again.
+              </p>
+            </div>
+          )}
         </form>
       </div>
     </Section>

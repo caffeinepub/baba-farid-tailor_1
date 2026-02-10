@@ -69,7 +69,7 @@ export default function ContactSection() {
 
               <div className="space-y-4">
                 <a
-                  href={`tel:${CONTACT_INFO.phone}`}
+                  href={`tel:${CONTACT_INFO.phoneHref}`}
                   className="flex items-start gap-4 p-4 rounded-lg hover:bg-muted transition-colors group"
                 >
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">

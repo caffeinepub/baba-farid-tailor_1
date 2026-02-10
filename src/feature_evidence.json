@@ -2,11 +2,27 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-replace-the-current-header-logo-placeholder-scissors-icon-with-the-user-uploaded-logo-image-file-1770202565370-png-and-display-it-in-the-site-header-branding-area-in-a-clean-responsive-way-that-matches-the-existing-premium-theme",
-      "featureTitle": "Replace the current header logo placeholder (scissors icon) with the user-uploaded logo image file (1770202565370.png), and display it in the site header branding area in a clean, responsive way that matches the existing premium theme.",
+      "featureId": "feature-add-the-two-user-uploaded-images-1770713137991-png-and-1770713334950-png-as-frontend-static-assets-for-catalog-usage-and-create-4-3-cropped-resized-versions-suitable-for-the-catalog-card-image-area",
+      "featureTitle": "Add the two user-uploaded images (1770713137991.png and 1770713334950.png) as frontend static assets for catalog usage, and create 4:3 cropped/resized versions suitable for the catalog card image area.",
+      "files": [],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-20"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-catalog-ui-so-each-style-card-displays-an-actual-image-using-the-style-image-field-as-the-source-path-filename-instead-of-the-current-placeholder-icon-and-image-text-include-a-graceful-fallback-e-g-placeholder-if-the-image-is-missing-or-fails-to-load",
+      "featureTitle": "Update the Catalog UI so each style card displays an actual image (using the style.image field as the source path/filename) instead of the current placeholder icon and image text; include a graceful fallback (e.g., placeholder) if the image is missing or fails to load.",
       "files": [
-        "frontend/src/components/branding/BrandLogo.tsx",
-        "frontend/src/components/navigation/SiteHeader.tsx"
+        "frontend/src/components/catalog/CatalogCardImage.tsx",
+        "frontend/src/components/catalog/CatalogSection.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -16,7 +32,25 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-12"
+        "REQ-21"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-wire-the-uploaded-photos-into-the-catalog-by-updating-the-backend-catalog-data-so-the-relevant-traditional-wear-styles-reference-the-new-static-image-filenames-paths-returned-via-getcatalog-at-minimum-ensure-pathani-kurta-displays-one-of-the-uploaded-images-in-the-catalog-section",
+      "featureTitle": "Wire the uploaded photos into the catalog by updating the backend catalog data so the relevant Traditional Wear styles reference the new static image filenames/paths returned via getCatalog() (at minimum ensure “Pathani Kurta” displays one of the uploaded images in the Catalog section).",
+      "files": [
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-22"
       ],
       "confidence": "high"
     }

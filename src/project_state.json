@@ -1,14 +1,19 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
+  "projectStateVersion": 15,
   "summary": "Build a professional, premium website for the tailoring business 'Baba Farid Tailor' featuring a catalog, online ordering with customer measurements, and standard business pages (Home, About, Catalog, Order Now, Contact).",
   "architectural_notes": [
     "Website should support a user-uploaded custom logo; include a placeholder slot in the header until provided.",
     "Premium visual theme using Charcoal Grey, Gold, and/or Deep Blue across the site.",
-    "Information architecture includes pages: Home, About Us, Catalog, Order Now, Contact Us."
+    "Information architecture includes pages: Home, About Us, Catalog, Order Now, Contact Us.",
+    "Update site contact info to use these real values: Phone: 8130163619 / 9717141954; Email: babafaridtailorshop@gmail.com (place in the same spot as the previous email/phone UI).",
+    "Update the Location text to: B-57 Fateh Nagar, Near by Tilak Nagar Metro Station, New Delhi -110058."
   ],
-  "known_issues": [],
-  "isFixRequest": false,
+  "known_issues": [
+    "Site currently shows a 'Saree blouse' option that the user wants removed."
+  ],
+  "isFixRequest": true,
+  "imageRequirements": "## Edit Images\n- Crop/resize to 4:3 for catalog card use (1770713137991.png > catalog-pathani-kurta.dim_1200x900.png)\n- Crop/resize to 4:3 for catalog card use (1770713334950.png > catalog-traditional-2.dim_1200x900.png)",
   "existing_features": [
     {
       "id": "feature-create-a-multi-page-website-with-the-following-sections-pages-and-navigation-home-about-us-catalog-order-now-and-contact-us-ensure-the-header-navigation-links-correctly-route-scroll-to-each-section-and-the-active-section-is-visually-indicated",
@@ -97,6 +102,70 @@
         "REQ-12"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-central-contact-configuration-so-the-website-displays-the-correct-phone-number-s-and-email-address-in-the-same-places-they-currently-appear-top-contact-bar-contact-section-and-footer-use-phone-8130163619-9717141954-and-email-babafaridtailorshop-gmail-com",
+      "title": "Update the central contact configuration so the website displays the correct phone number(s) and email address in the same places they currently appear (top contact bar, Contact section, and footer). Use: Phone: \"8130163619/9717141954\" and Email: \"babafaridtailorshop@gmail.com\".",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-business-location-address-to-the-central-contact-configuration-and-display-it-in-the-existing-location-address-area-in-the-contact-section-using-this-exact-text-b-57-fateh-nagar-near-by-tilak-nagar-metro-station-new-delhi-110058",
+      "title": "Add the business location address to the central contact configuration and display it in the existing location/address area in the Contact section using this exact text: \"B-57 Fateh Nagar Near by Tilak Nagar Metro Station New Delhi -110058\".",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-frontend-does-not-show-or-keep-a-stale-selection-for-the-removed-saree-blouse-style-in-the-catalog-section-and-order-now-form-including-clearing-any-previously-selected-style-if-it-no-longer-exists-in-the-fetched-catalog",
+      "title": "Ensure the frontend does not show or keep a stale selection for the removed \"Saree Blouse\" style in the Catalog section and Order Now form, including clearing any previously selected style if it no longer exists in the fetched catalog.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-saree-blouse-style-from-the-application-so-it-is-not-returned-by-the-backend-catalog-api-and-cannot-appear-or-be-selected-anywhere-in-the-frontend-catalog-section-and-order-now-form-ensure-any-previously-selected-saree-blouse-value-is-cleared-if-it-no-longer-exists-in-the-fetched-catalog",
+      "title": "Remove the \"Saree Blouse\" style from the application so it is not returned by the backend catalog API and cannot appear or be selected anywhere in the frontend (Catalog section and Order Now form). Ensure any previously selected \"Saree Blouse\" value is cleared if it no longer exists in the fetched catalog.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-frontend-catalog-section-and-order-now-form-never-display-african-kaftan-and-that-any-previously-selected-filled-african-kaftan-value-is-cleared-if-it-appears-in-cached-catalog-data-or-local-state",
+      "title": "Ensure the frontend Catalog section and Order Now form never display \"African Kaftan\" and that any previously selected/filled \"African Kaftan\" value is cleared if it appears in cached catalog data or local state.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-two-user-uploaded-images-1770713137991-png-and-1770713334950-png-as-frontend-static-assets-for-catalog-usage-and-create-4-3-cropped-resized-versions-suitable-for-the-catalog-card-image-area",
+      "title": "Add the two user-uploaded images (1770713137991.png and 1770713334950.png) as frontend static assets for catalog usage, and create 4:3 cropped/resized versions suitable for the catalog card image area.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-catalog-ui-so-each-style-card-displays-an-actual-image-using-the-style-image-field-as-the-source-path-filename-instead-of-the-current-placeholder-icon-and-image-text-include-a-graceful-fallback-e-g-placeholder-if-the-image-is-missing-or-fails-to-load",
+      "title": "Update the Catalog UI so each style card displays an actual image (using the style.image field as the source path/filename) instead of the current placeholder icon and image text; include a graceful fallback (e.g., placeholder) if the image is missing or fails to load.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-wire-the-uploaded-photos-into-the-catalog-by-updating-the-backend-catalog-data-so-the-relevant-traditional-wear-styles-reference-the-new-static-image-filenames-paths-returned-via-getcatalog-at-minimum-ensure-pathani-kurta-displays-one-of-the-uploaded-images-in-the-catalog-section",
+      "title": "Wire the uploaded photos into the catalog by updating the backend catalog data so the relevant Traditional Wear styles reference the new static image filenames/paths returned via getCatalog() (at minimum ensure “Pathani Kurta” displays one of the uploaded images in the Catalog section).",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -147,6 +216,40 @@
     {
       "id": "AR-13",
       "summary": "Replace the header logo placeholder with the specific logo the user wants to use (once the logo file/asset is provided)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Remove the 'Saree blouse' option from the website (e.g., from Catalog/Traditional wear and any related Order Now selection options)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Remove the \"Saree Blouse\" style option from the backend catalog so it is no longer returned by the getCatalog API (and therefore cannot be selected in the Catalog section or Order Now form).",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Update the Catalog (and related Order Now style selection) to remove the \"African Kaftan\" style and add a \"Pathani Kurta\" style instead",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Update the backend catalog data so the style named \"African Kaftan\" is removed and a new style named \"Pathani Kurta\" is available under the \"Traditional Wear\" category returned by getCatalog().",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Update the Catalog photo/image(s) to include the newly requested item (e.g., Pathani Kurta) so it appears in the catalog visuals",
       "reqIds": [],
       "status": "pending"
     }

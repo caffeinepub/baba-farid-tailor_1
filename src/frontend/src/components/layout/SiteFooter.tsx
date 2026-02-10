@@ -49,7 +49,7 @@ export default function SiteFooter() {
             <h4 className="font-semibold">Contact</h4>
             <div className="space-y-2 text-sm text-secondary-foreground/80">
               <a
-                href={`tel:${CONTACT_INFO.phone}`}
+                href={`tel:${CONTACT_INFO.phoneHref}`}
                 className="flex items-center gap-2 hover:text-primary transition-colors"
               >
                 <Phone className="h-4 w-4" />

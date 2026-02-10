@@ -1,39 +1,75 @@
 {
   "kind": "build_request",
-  "title": "Replace header logo placeholder with the user-provided logo image",
+  "title": "Add uploaded photos to Catalog style cards (Traditional Wear)",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-12",
-      "text": "Replace the current header logo placeholder (scissors icon) with the user-uploaded logo image file (1770202565370.png), and display it in the site header branding area in a clean, responsive way that matches the existing premium theme.",
+      "id": "REQ-20",
+      "text": "Add the two user-uploaded images (1770713137991.png and 1770713334950.png) as frontend static assets for catalog usage, and create 4:3 cropped/resized versions suitable for the catalog card image area.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-user-1"
         ],
         "quotes": [
-          "Isme logo Yeah wala"
+          "Catlog photo mai ise add karo"
         ]
       },
       "acceptanceCriteria": [
-        "The header no longer shows the scissors placeholder icon; it shows the logo from 1770202565370.png instead.",
-        "The logo is sized appropriately for the existing header height (does not overflow or cause layout shifts) on mobile and desktop.",
-        "The logo includes meaningful alt text in English (e.g., \"Baba Farid Tailor logo\").",
-        "If the logo image fails to load for any reason, a reasonable fallback is shown (e.g., the existing placeholder component or a text-only fallback) without breaking layout."
+        "The repo contains the uploaded images under a static assets path (e.g., frontend/public/assets/...) and also contains 4:3 variants (e.g., 1200x900) for consistent catalog display.",
+        "The 4:3 variants preserve the subject clearly (no important cropping of the outfit)."
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "text": "Update the Catalog UI so each style card displays an actual image (using the style.image field as the source path/filename) instead of the current placeholder icon and image text; include a graceful fallback (e.g., placeholder) if the image is missing or fails to load.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ],
+        "quotes": [
+          "Catlog photo mai ise add karo"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Catalog cards show an image in the existing 4:3 media area for styles that have a valid image path.",
+        "If an image fails to load, the UI does not break and shows a clean fallback state (no broken-image icon in the final design)."
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "text": "Wire the uploaded photos into the catalog by updating the backend catalog data so the relevant Traditional Wear styles reference the new static image filenames/paths returned via getCatalog() (at minimum ensure “Pathani Kurta” displays one of the uploaded images in the Catalog section).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ],
+        "quotes": [
+          "Catlog photo mai ise add karo"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Calling getCatalog() returns style.image values that match the newly added static asset filenames/paths for the mapped Traditional Wear styles.",
+        "In the Catalog section, “Pathani Kurta” renders with the mapped uploaded photo."
       ]
     }
   ],
   "constraints": [
-    "Frontend immutable paths must not be modified: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
-    "Do not route or serve images via the backend; use static frontend assets."
+    "Backend must remain a single Motoko actor (all logic in backend/main.mo).",
+    "Do not edit files under frontend/src/components/ui or any immutablePaths listed in SYSTEM_CONTEXT.",
+    "Do not serve images via the backend; images must be static frontend assets."
   ],
   "nonGoals": [
-    "Do not change site navigation structure, sections, or copy beyond what is required to swap the logo.",
-    "Do not implement new authentication, backend storage, or other new features unrelated to the logo swap."
+    "Adding new catalog categories or styles beyond mapping images to existing styles (unless explicitly requested later).",
+    "Implementing image upload or an admin panel for managing catalog images."
   ],
   "imageRequirements": {
     "required": [],
-    "edits": []
+    "edits": [
+      "Crop/resize to 4:3 for catalog card use (1770713137991.png > catalog-pathani-kurta.dim_1200x900.png)",
+      "Crop/resize to 4:3 for catalog card use (1770713334950.png > catalog-traditional-2.dim_1200x900.png)"
+    ]
   },
   "userProfileUpdate": {
     "goalsToAdd": [],

@@ -1,24 +1,44 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T08:23:18.437Z",
-  "summary": "REQ-12 is largely implemented by introducing a new BrandLogo component that renders the static logo image with English alt text and an onError fallback to the existing LogoPlaceholder, and wiring it into the SiteHeader. However, the diff summary does not show the actual logo asset file (1770202565370.png) being added to the frontend static assets, so the requested user-provided image may not actually be present in the build based on available evidence.",
+  "generatedAt": "2026-02-10T09:16:16.267Z",
+  "summary": "Catalog cards were updated to render images with a fallback component, and the frontend query layer maps “Pathani Kurta” to a new static asset path. However, the diff does not show the required new image assets being added, and the backend catalog data does not appear to be wired to return the new static asset image paths via getCatalog() as required.",
   "missing_requirements": [
     {
-      "id": "REQ-12",
-      "requirement": "Use the user-uploaded logo image file (1770202565370.png) as a static frontend asset for the header logo.",
-      "reason": "The code references \"/assets/1770202565370.png\", but the diff summary does not include adding the actual image file to the repository/static assets, so it is not evidenced that the user-provided file is available at that path.",
+      "id": "REQ-20",
+      "requirement": "Add the two user-uploaded images as frontend static assets and include 4:3 cropped/resized variants (e.g., 1200x900) for catalog cards.",
+      "reason": "The diff summary shows no added image files under a static assets path (e.g., frontend/public/assets/...) and no evidence of the two uploaded PNGs or their 4:3 resized variants being committed.",
       "evidence": [
-        "frontend/src/components/branding/BrandLogo.tsx"
+        "file-diff summary shows only 1 added file (frontend/src/components/catalog/CatalogCardImage.tsx) and no asset/image additions"
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "requirement": "Update backend catalog data so relevant Traditional Wear styles reference the new static image filenames/paths returned via getCatalog() (at minimum Pathani Kurta).",
+      "reason": "Although backend/main.mo changes the Pathani Kurta image value, it sets it to \"photo_360464494722624.jpg\" (not the new static asset path). The new static asset path is instead applied in the frontend hook mapping, so getCatalog() does not itself return the required static asset paths as specified.",
+      "evidence": [
+        "backend/main.mo (Pathani Kurta image = \"photo_360464494722624.jpg\")",
+        "frontend/src/hooks/useQueries.ts (maps Pathani Kurta image to '/assets/generated/catalog-pathani-kurta.dim_1200x900.png')"
       ]
     }
   ],
-  "hallucinated_features": [],
-  "confidence": 0.64,
+  "hallucinated_features": [
+    {
+      "description": "Filtering out styles named \"Saree Blouse\" and \"African Kaftan\" from the catalog data/UI.",
+      "reason": "The BuildRequest is about mapping uploaded photos to existing Traditional Wear style cards and showing images; it does not request removing/hiding any styles from the catalog.",
+      "evidence": [
+        "frontend/src/components/catalog/CatalogSection.tsx (defensive UI-level filtering to exclude \"Saree Blouse\" and \"African Kaftan\")",
+        "frontend/src/hooks/useQueries.ts (filters out \"Saree Blouse\" and \"African Kaftan\" at the hook level)"
+      ]
+    }
+  ],
+  "confidence": 0.74,
   "changed_files": [
+    "backend/main.mo",
     "frontend-file-summaries.txt",
-    "frontend/src/components/branding/BrandLogo.tsx",
-    "frontend/src/components/navigation/SiteHeader.tsx",
+    "frontend/src/components/catalog/CatalogCardImage.tsx",
+    "frontend/src/components/catalog/CatalogSection.tsx",
+    "frontend/src/hooks/useQueries.ts",
     "project_state.json"
   ]
 }

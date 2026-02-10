@@ -1,6 +1,5 @@
 import List "mo:core/List";
 import Array "mo:core/Array";
-import Text "mo:core/Text";
 import Time "mo:core/Time";
 import Order "mo:core/Order";
 
@@ -162,20 +161,12 @@ actor {
       image = "slacks.jpg";
     },
     {
-      id = 9;
-      name = "Saree Blouse";
-      description = "Traditional Indian blouse for saree wear.";
-      categoryId = 4;
-      price = 40.00;
-      image = "saree_blouse.jpg";
-    },
-    {
       id = 10;
-      name = "African Kaftan";
-      description = "African-inspired kaftan dress.";
+      name = "Pathani Kurta";
+      description = "Traditional South Asian kurta with relaxed fit.";
       categoryId = 4;
       price = 80.00;
-      image = "kaftan.jpg";
+      image = "photo_360464494722624.jpg"; // Static image filename from uploaded photo
     },
     {
       id = 11;

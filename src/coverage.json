@@ -1,39 +1,67 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T08:23:18.440Z",
+  "generatedAt": "2026-02-10T09:16:16.270Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 3,
+    "implemented": 3,
     "items": [
       {
-        "id": "REQ-12",
-        "summary": "Replace the current header logo placeholder (scissors icon) with the user-uploaded logo image file (1770202565370.png), and display it in the site header branding area in a clean, responsive way that matches the existing premium theme.",
+        "id": "REQ-20",
+        "summary": "Add the two user-uploaded images (1770713137991.png and 1770713334950.png) as frontend static assets for catalog usage, and create 4:3 cropped/resized versions suitable for the catalog card image area.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/1770202565370.png",
-          "frontend/src/components/branding/BrandLogo.tsx",
-          "frontend/src/components/navigation/SiteHeader.tsx"
+          "frontend/public/assets/uploads/1770713137991.png",
+          "frontend/public/assets/uploads/1770713334950.png",
+          "frontend/public/assets/generated/catalog-pathani-kurta.dim_1200x900.png",
+          "frontend/public/assets/generated/catalog-traditional-2.dim_1200x900.png"
         ],
         "matchedFiles": [
-          "frontend/src/components/branding/BrandLogo.tsx",
-          "frontend/src/components/navigation/SiteHeader.tsx"
+          "frontend/public/assets/generated/catalog-pathani-kurta.dim_1200x900.png",
+          "frontend/public/assets/generated/catalog-traditional-2.dim_1200x900.png"
+        ]
+      },
+      {
+        "id": "REQ-21",
+        "summary": "Update the Catalog UI so each style card displays an actual image (using the style.image field as the source path/filename) instead of the current placeholder icon and image text; include a graceful fallback (e.g., placeholder) if the image is missing or fails to load.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/catalog/CatalogCardImage.tsx",
+          "frontend/src/components/catalog/CatalogSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/catalog/CatalogCardImage.tsx",
+          "frontend/src/components/catalog/CatalogSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-22",
+        "summary": "Wire the uploaded photos into the catalog by updating the backend catalog data so the relevant Traditional Wear styles reference the new static image filenames/paths returned via getCatalog() (at minimum ensure “Pathani Kurta” displays one of the uploaded images in the Catalog section).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts"
         ]
       }
     ]
   },
   "changedFiles": [
+    "backend/main.mo",
     "build-request.json",
-    "build-template/README.md",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/branding/BrandLogo.tsx",
-    "frontend/src/components/navigation/SiteHeader.tsx",
+    "frontend/public/assets/generated/catalog-pathani-kurta.dim_1200x900.png",
+    "frontend/public/assets/generated/catalog-traditional-2.dim_1200x900.png",
+    "frontend/src/components/catalog/CatalogCardImage.tsx",
+    "frontend/src/components/catalog/CatalogSection.tsx",
+    "frontend/src/hooks/useQueries.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

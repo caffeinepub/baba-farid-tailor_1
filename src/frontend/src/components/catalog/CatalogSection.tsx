@@ -1,14 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Loader2, AlertCircle } from 'lucide-react';
 import Section from '../layout/Section';
 import { useCatalog } from '../../hooks/useQueries';
 import { useSelectedStyle } from '../../state/selectedStyle';
+import CatalogCardImage from './CatalogCardImage';
 import type { Style } from '../../backend';
 
 export default function CatalogSection() {
   const { data: catalog, isLoading, error } = useCatalog();
-  const { setSelectedStyle } = useSelectedStyle();
+  const { setSelectedStyle, reconcileWithCatalog } = useSelectedStyle();
   const [selectedCategory, setSelectedCategory] = useState<bigint | null>(null);
+
+  // Reconcile selected style when catalog changes
+  useEffect(() => {
+    if (catalog?.styles) {
+      reconcileWithCatalog(catalog.styles);
+    }
+  }, [catalog, reconcileWithCatalog]);
 
   const handleStyleSelect = (style: Style) => {
     setSelectedStyle(style);
@@ -21,9 +29,14 @@ export default function CatalogSection() {
     }
   };
 
+  // Apply defensive UI-level filtering to exclude "Saree Blouse" and "African Kaftan"
+  const availableStyles = catalog?.styles.filter(
+    (style) => style.name !== 'Saree Blouse' && style.name !== 'African Kaftan'
+  );
+
   const filteredStyles = selectedCategory
-    ? catalog?.styles.filter((style) => style.categoryId === selectedCategory)
-    : catalog?.styles;
+    ? availableStyles?.filter((style) => style.categoryId === selectedCategory)
+    : availableStyles;
 
   if (isLoading) {
     return (
@@ -92,24 +105,20 @@ export default function CatalogSection() {
           {filteredStyles?.map((style) => (
             <div
               key={style.id.toString()}
-              className="group bg-card border border-border rounded-xl overflow-hidden hover:border-primary/50 hover:shadow-xl transition-all"
+              className="bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all group"
             >
-              <div className="aspect-[4/3] bg-muted flex items-center justify-center">
-                <div className="text-center p-6">
-                  <div className="text-6xl mb-2">👔</div>
-                  <p className="text-sm text-muted-foreground">{style.image}</p>
-                </div>
+              <div className="aspect-[4/3] overflow-hidden">
+                <CatalogCardImage 
+                  src={style.image} 
+                  alt={style.name}
+                />
               </div>
-              
               <div className="p-6 space-y-4">
                 <div>
                   <h3 className="text-xl font-semibold mb-2">{style.name}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {style.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{style.description}</p>
                 </div>
-                
-                <div className="flex items-center justify-between pt-4 border-t border-border">
+                <div className="flex items-center justify-between">
                   <span className="text-2xl font-bold text-primary">
                     ${style.price.toFixed(2)}
                   </span>
@@ -124,6 +133,12 @@ export default function CatalogSection() {
             </div>
           ))}
         </div>
+
+        {filteredStyles?.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No styles found in this category.</p>
+          </div>
+        )}
       </div>
     </Section>
   );

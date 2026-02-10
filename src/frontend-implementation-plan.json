@@ -1,32 +1,70 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Swap header logo placeholder with provided logo image",
+  "title": "Catalog cards: add Traditional Wear photos as static assets and render real images",
   "requirements": [
     {
-      "id": "REQ-12",
-      "summary": "Replace the header scissors placeholder with the provided logo image, ensuring responsive sizing, meaningful alt text, and a non-breaking fallback on load failure.",
+      "id": "REQ-20",
+      "summary": "Add the two uploaded photos as static frontend assets and include 4:3 (1200x900) catalog-card variants.",
       "acceptanceCriteria": [
-        "The header no longer shows the scissors placeholder icon; it shows the logo from 1770202565370.png instead.",
-        "The logo is sized appropriately for the existing header height (does not overflow or cause layout shifts) on mobile and desktop.",
-        "The logo includes meaningful alt text in English (e.g., \"Baba Farid Tailor logo\").",
-        "If the logo image fails to load for any reason, a reasonable fallback is shown (e.g., the existing placeholder component or a text-only fallback) without breaking layout."
+        "The repo contains the uploaded images under a static assets path (e.g., frontend/public/assets/...) and also contains 4:3 variants (e.g., 1200x900) for consistent catalog display.",
+        "The 4:3 variants preserve the subject clearly (no important cropping of the outfit)."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/1770202565370.png",
+          "path": "frontend/public/assets/uploads/1770713137991.png",
           "operation": "create",
-          "description": "Add the user-provided logo image as a static frontend asset (copy from provided asset 1770202565370.png). Ensure the app references this static path and does not route images through the backend."
+          "description": "Add the original uploaded image as a static frontend asset for catalog usage."
         },
         {
-          "path": "frontend/src/components/branding/BrandLogo.tsx",
+          "path": "frontend/public/assets/uploads/1770713334950.png",
           "operation": "create",
-          "description": "Create a dedicated header-branding logo component that renders an <img> using the static asset at frontend/public/assets/1770202565370.png with responsive sizing (fit within the header height) and meaningful alt text (e.g., \"Baba Farid Tailor logo\"). Implement a safe onError fallback that swaps to the existing LogoPlaceholder (or a compact text-only fallback) without breaking layout."
+          "description": "Add the original uploaded image as a static frontend asset for catalog usage."
         },
         {
-          "path": "frontend/src/components/navigation/SiteHeader.tsx",
+          "path": "frontend/public/assets/generated/catalog-pathani-kurta.dim_1200x900.png",
+          "operation": "create",
+          "description": "Add the 4:3 cropped/resized (1200x900) catalog-card variant for 1770713137991.png as a static frontend asset."
+        },
+        {
+          "path": "frontend/public/assets/generated/catalog-traditional-2.dim_1200x900.png",
+          "operation": "create",
+          "description": "Add the 4:3 cropped/resized (1200x900) catalog-card variant for 1770713334950.png as a static frontend asset."
+        }
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "summary": "Render style images in catalog style cards using style.image and add a clean fallback when images are missing or fail to load.",
+      "acceptanceCriteria": [
+        "Catalog cards show an image in the existing 4:3 media area for styles that have a valid image path.",
+        "If an image fails to load, the UI does not break and shows a clean fallback state (no broken-image icon in the final design)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/catalog/CatalogCardImage.tsx",
+          "operation": "create",
+          "description": "Create a small catalog-only image component that renders a 4:3 image (object-fit cover) from a provided src (style.image) and switches to a styled fallback state on missing/failed load (no broken-image icon)."
+        },
+        {
+          "path": "frontend/src/components/catalog/CatalogSection.tsx",
           "operation": "modify",
-          "description": "Replace the current LogoPlaceholder usage in the header branding area with the new BrandLogo component, preserving the existing layout, spacing, and premium theme styling. Ensure the logo container remains stable to avoid layout shifts on load."
+          "description": "Replace the current placeholder icon/text block in the 4:3 media area with the new CatalogCardImage component, passing style.image as the src and ensuring layout stays in the existing aspect-[4/3] container."
+        }
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "summary": "Wire the new static photo filenames into catalog rendering so Traditional Wear styles (at minimum Pathani Kurta) resolve to the new images.",
+      "acceptanceCriteria": [
+        "Calling getCatalog() returns style.image values that match the newly added static asset filenames/paths for the mapped Traditional Wear styles.",
+        "In the Catalog section, “Pathani Kurta” renders with the mapped uploaded photo."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add a frontend-side normalization/override step after getCatalog() so mapped styles (at minimum name === \"Pathani Kurta\") have style.image set to the new static asset path (e.g., /assets/generated/catalog-pathani-kurta.dim_1200x900.png), keeping the rest of the catalog unchanged."
         }
       ]
     }
