@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
+  "projectStateVersion": 5,
   "summary": "Build a professional, premium website for the tailoring business 'Baba Farid Tailor' featuring a catalog, online ordering with customer measurements, and standard business pages (Home, About, Catalog, Order Now, Contact).",
   "architectural_notes": [
     "Website should support a user-uploaded custom logo; include a placeholder slot in the header until provided.",
@@ -9,7 +9,6 @@
   ],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Premium fabric texture background, subtle weave pattern, dark charcoal tone (fabric-texture-bg.dim_1920x1080.png)\n- Elegant tailoring hero banner with abstract tailoring elements (measuring tape/suit silhouette), charcoal and gold palette (tailoring-hero-banner.dim_2400x900.png)",
   "existing_features": [
     {
       "id": "feature-create-a-multi-page-website-with-the-following-sections-pages-and-navigation-home-about-us-catalog-order-now-and-contact-us-ensure-the-header-navigation-links-correctly-route-scroll-to-each-section-and-the-active-section-is-visually-indicated",
@@ -90,6 +89,14 @@
         "REQ-11"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-header-logo-placeholder-scissors-icon-with-the-user-uploaded-logo-image-file-1770202565370-png-and-display-it-in-the-site-header-branding-area-in-a-clean-responsive-way-that-matches-the-existing-premium-theme",
+      "title": "Replace the current header logo placeholder (scissors icon) with the user-uploaded logo image file (1770202565370.png), and display it in the site header branding area in a clean, responsive way that matches the existing premium theme.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -135,6 +142,12 @@
       "reqIds": [
         "REQ-6"
       ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Replace the header logo placeholder with the specific logo the user wants to use (once the logo file/asset is provided)",
+      "reqIds": [],
       "status": "pending"
     }
   ],

@@ -1,241 +1,44 @@
 {
   "kind": "build_request",
-  "title": "Premium website for 'Baba Farid Tailor' with catalog and online measurement order form",
+  "title": "Replace header logo placeholder with the user-provided logo image",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Create a multi-page website with the following sections/pages and navigation: Home, About Us, Catalog, Order Now, and Contact Us. Ensure the header navigation links correctly route/scroll to each section and the active section is visually indicated.",
+      "id": "REQ-12",
+      "text": "Replace the current header logo placeholder (scissors icon) with the user-uploaded logo image file (1770202565370.png), and display it in the site header branding area in a clean, responsive way that matches the existing premium theme.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "Sections Needed: Home, About Us (mentioning our expertise in bespoke tailoring), Catalog, Order Now (Form), and Contact Us."
+          "Isme logo Yeah wala"
         ]
       },
       "acceptanceCriteria": [
-        "A header navigation is present on all pages/sections with links for Home, About Us, Catalog, Order Now, Contact Us.",
-        "Each nav item takes the user to the correct page/section.",
-        "The current page/section is visually highlighted in the navigation."
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "text": "Implement a top header area that prominently displays the business name \"Baba Farid Tailor\" and includes a dedicated logo placeholder region intended for a future uploaded custom logo (placeholder should be visually distinct and sized appropriately).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "Header & Logo: Place the business name 'Baba Farid Tailor' prominently in the header. I have a custom logo that I will upload, so please create a dedicated placeholder for it."
-        ]
-      },
-      "acceptanceCriteria": [
-        "The header shows \"Baba Farid Tailor\" prominently.",
-        "A clearly marked logo placeholder area exists in the header (e.g., a framed box with 'Logo' label) and does not break layout on mobile.",
-        "Layout remains responsive across common breakpoints."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Display contact details (Mobile Number and Email ID) clearly in a top bar and/or footer, using placeholder values that can be easily replaced later (e.g., constants/config in the frontend).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "Contact Details: Show my Mobile Number and Email ID clearly in the top bar or the footer section so customers can easily reach me."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Mobile number and email are visible without needing to navigate away (in top bar and/or footer).",
-        "Values are implemented as easily editable placeholders (not hard-coded in multiple locations).",
-        "On mobile, the contact details remain readable and do not overlap other elements."
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Create a premium 'Catalog' section that showcases the categories: Suits, Shirts, Pants, and Traditional wear. Each category must have a presentable card/tile layout and a way to choose a style that can be used by the Order Now form.",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "Service Catalog: Create a 'Catalog' section showcasing different categories like Suits, Shirts, Pants, and Traditional wear.",
-          "Online Ordering & Measurements: I need an online order form where customers can select a style from the catalog ..."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Catalog UI shows the four required categories: Suits, Shirts, Pants, Traditional wear.",
-        "Each category is displayed as a visually consistent card/tile with a title and brief placeholder description.",
-        "A user can select a category/style and proceed to (or prefill) the Order Now form with that selection.",
-        "Catalog data is sourced from the backend (not only hard-coded in the UI)."
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Implement an 'Order Now' page containing an online order form where customers can (1) select a category and style from the catalog and (2) submit their measurements (including at minimum Length, Chest, Waist, Shoulder). Include additional common tailoring measurements as appropriate and provide size-chart guidance in the UI (e.g., a reference table and/or helper text) without requiring user authentication.",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "Online Ordering & Measurements: I need an online order form where customers can select a style from the catalog and provide their measurements (Length, Chest, Waist, Shoulder, etc.) based on size charts."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Order form allows selecting a category and style from the existing catalog list.",
-        "Measurements inputs include at least: Length, Chest, Waist, Shoulder (and may include others like Sleeve, Neck, Hip, Inseam).",
-        "UI includes size chart guidance (e.g., a small table or expandable panel) and clearly states units (cm/in) with a single chosen unit or a unit selector.",
-        "Client-side validation prevents submission when required fields are missing or invalid (e.g., non-numeric measurements).",
-        "On submit, the order is stored in the backend and the user sees a confirmation state with an order reference (e.g., order ID)."
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "text": "Create a backend data model and API in the single Motoko actor to: (1) return catalog categories/styles, (2) accept new order submissions containing selected catalog style + customer measurements + basic contact info, and (3) list orders for basic verification/testing purposes (non-authenticated is acceptable unless otherwise specified).",
-      "target": "backend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "Service Catalog: Create a 'Catalog' section showcasing different categories like Suits, Shirts, Pants, and Traditional wear.",
-          "Online Ordering & Measurements: I need an online order form ... provide their measurements ..."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Backend exposes a query method to fetch catalog data used by the frontend.",
-        "Backend exposes an update method to create an order and returns a unique order identifier.",
-        "Backend stores orders in stable-compatible state so data persists across canister upgrades (as supported by the template).",
-        "Backend exposes a method to list submitted orders (for development/testing)."
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "text": "Add an About Us section that explicitly mentions expertise in bespoke tailoring and premium craftsmanship, using clear English copy appropriate for a professional tailoring brand.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "About Us (mentioning our expertise in bespoke tailoring)"
-        ]
-      },
-      "acceptanceCriteria": [
-        "About Us content includes a clear statement about bespoke tailoring expertise.",
-        "Copy is in English and matches a premium/professional tone.",
-        "Section layout is responsive and visually consistent with the site theme."
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "text": "Add a Contact Us section/page that includes the displayed phone/email, a simple contact form (name, email/phone, message) and clear location placeholder text. The contact form may submit to the backend as a stored inquiry or may be UI-only if backend storage is not implemented; if backend storage is implemented, it must persist inquiries in the backend actor.",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "Contact Us."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Contact section shows phone and email again for clarity.",
-        "Contact form includes fields: Name, Email or Phone, Message, with basic validation.",
-        "If backend storage is implemented: inquiries can be submitted, stored, and confirmed to the user; otherwise, the UI clearly indicates the form is not sending messages yet."
-      ]
-    },
-    {
-      "id": "REQ-9",
-      "text": "Apply a premium, professional visual theme across the entire site using a coherent palette based on Charcoal Grey with Gold accents and optional Deep Blue highlights. Ensure consistent typography, spacing, button styles, and section hierarchy, and avoid using a blue+purple default theme.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "Design Aesthetic: The website should look premium, using a color palette like Charcoal Grey, Gold, or Deep Blue to represent high-quality craftsmanship."
-        ]
-      },
-      "acceptanceCriteria": [
-        "The site consistently uses Charcoal Grey as a base with Gold accents; Deep Blue may be used sparingly for emphasis.",
-        "Typography, headings, and section spacing look consistent across pages/sections.",
-        "Buttons/links have clear hover/focus states and meet basic contrast/readability expectations.",
-        "No default blue+purple theme styling dominates the UI."
-      ]
-    },
-    {
-      "id": "REQ-10",
-      "text": "Integrate React Query-based data fetching for catalog and order submission, including loading and error states for: catalog load, order submission, and (if implemented) contact inquiry submission.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "Service Catalog...",
-          "Online Ordering & Measurements..."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Catalog UI shows a loading state while fetching and a clear error state on failure.",
-        "Order submission shows a submitting state and a clear error state on failure.",
-        "Successful order submission resets the form or transitions to a confirmation state without requiring a page refresh."
-      ]
-    },
-    {
-      "id": "REQ-11",
-      "text": "Add required generated static images to enhance the premium tailoring aesthetic (e.g., subtle fabric texture and a hero/banner image) and render them from frontend static assets (do not serve images via the backend).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "The website should look premium..."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Generated images are placed in frontend/public/assets/generated and referenced directly by the frontend.",
-        "Images are used in a way that improves the premium aesthetic (e.g., hero background/banner and/or subtle section background).",
-        "Images are responsive and do not cause layout shifts or readability issues."
+        "The header no longer shows the scissors placeholder icon; it shows the logo from 1770202565370.png instead.",
+        "The logo is sized appropriately for the existing header height (does not overflow or cause layout shifts) on mobile and desktop.",
+        "The logo includes meaningful alt text in English (e.g., \"Baba Farid Tailor logo\").",
+        "If the logo image fails to load for any reason, a reasonable fallback is shown (e.g., the existing placeholder component or a text-only fallback) without breaking layout."
       ]
     }
   ],
   "constraints": [
-    "Use English for all user-facing text.",
-    "Backend must remain a single Motoko actor (no additional backend services).",
-    "Do not modify files under frontend/src/components/ui or other immutablePaths; compose them instead.",
-    "Do not implement third-party authentication; only Internet Identity would be allowed, but it is not required for this scope."
+    "Frontend immutable paths must not be modified: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Do not route or serve images via the backend; use static frontend assets."
   ],
   "nonGoals": [
-    "Admin dashboard for managing catalog/orders.",
-    "Payment processing or checkout.",
-    "Real-time chat, notifications, or email sending integrations.",
-    "Third-party analytics or marketing integrations.",
-    "User accounts/authentication flows unless explicitly requested later."
+    "Do not change site navigation structure, sections, or copy beyond what is required to swap the logo.",
+    "Do not implement new authentication, backend storage, or other new features unrelated to the logo swap."
   ],
   "imageRequirements": {
-    "required": [
-      "Premium fabric texture background, subtle weave pattern, dark charcoal tone (fabric-texture-bg.dim_1920x1080.png)",
-      "Elegant tailoring hero banner with abstract tailoring elements (measuring tape/suit silhouette), charcoal and gold palette (tailoring-hero-banner.dim_2400x900.png)"
-    ],
+    "required": [],
     "edits": []
   },
   "userProfileUpdate": {
     "goalsToAdd": [],
     "goalsToRemove": [],
-    "preferencesToAdd": [
-      "Use English for user-facing website copy."
-    ],
+    "preferencesToAdd": [],
     "preferencesToRemove": [],
     "miscToAdd": [],
     "miscToRemove": [],

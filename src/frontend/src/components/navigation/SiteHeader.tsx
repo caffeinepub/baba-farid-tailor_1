@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { CONTACT_INFO } from '../../config/contact';
-import LogoPlaceholder from '../branding/LogoPlaceholder';
+import BrandLogo from '../branding/BrandLogo';
 
 interface SiteHeaderProps {
   activeSection: string;
@@ -54,7 +54,7 @@ export default function SiteHeader({ activeSection }: SiteHeaderProps) {
         <div className="flex items-center justify-between h-20">
           {/* Logo and Brand */}
           <div className="flex items-center gap-4">
-            <LogoPlaceholder />
+            <BrandLogo />
             <div>
               <h1 className="text-xl md:text-2xl font-bold text-foreground">
                 {CONTACT_INFO.businessName}
